@@ -1,8 +1,9 @@
 language: go
 sudo: required
+dist: precise
 go:
-  - 1.7.6
   - 1.8.3
+  - 1.9
   - tip
 os:
   - linux
@@ -18,6 +19,8 @@ script:
   - ./hugo -s docs/
   - ./hugo --renderToMemory -s docs/
 before_install:
+  # more recent version of ruby is required for sinatra
+  - rvm install 2.2.4
   # gem install must be run with sudo on OSX
-  - sudo gem install asciidoctor | gem install asciidoctor
-  - sudo pip install docutils
+  - sudo gem install asciidoctor sinatra --no-ri --no-rdoc | gem install asciidoctor sinatra --no-ri --no-rdoc
+  - sudo pip install docutils flask
