@@ -578,7 +578,7 @@ func getAsciidocContent(ctx *RenderingContext) []byte {
 	var isAsciidoctor bool
 	path := getAsciidocExecPath()
 	if path == "" {
-		path := getAsciidoctorExecPath()
+		path = getAsciidoctorExecPath()
 		if path == "" {
 			jww.ERROR.Println("asciidoctor / asciidoc not found in $PATH: Please install.\n",
 				"                 Leaving AsciiDoc content unrendered.")
