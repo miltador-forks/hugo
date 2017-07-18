@@ -692,7 +692,7 @@ func getRstContent(ctx *RenderingContext) []byte {
 		}
 	}
 
-	return result[bodyStart+7: bodyEnd]
+	return result[bodyStart+7 : bodyEnd]
 }
 
 func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
