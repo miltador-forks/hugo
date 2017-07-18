@@ -588,12 +588,13 @@ func getAsciidocContent(ctx *RenderingContext) []byte {
 	}
 
 	jww.INFO.Println("Rendering", ctx.DocumentName, "with", path, "...")
-	cmd := exec.Command(path, "--no-header-footer", "--safe")
+	args := []string{"--no-header-footer", "--safe"}
 	if isAsciidoctor {
 		// asciidoctor-specific arg to show stack traces on errors
-		cmd.Args = append(cmd.Args, "--trace")
+		args = append(args, "--trace")
 	}
-	cmd.Args = append(cmd.Args, "-")
+	args = append(args, "-")
+	cmd := exec.Command(path, args...)
 	cmd.Stdin = bytes.NewReader(cleanContent)
 	var out, cmderr bytes.Buffer
 	cmd.Stdout = &out
@@ -692,7 +693,7 @@ func getRstContent(ctx *RenderingContext) []byte {
 		}
 	}
 
-	return result[bodyStart+7: bodyEnd]
+	return result[bodyStart+7 : bodyEnd]
 }
 
 func orgRender(ctx *RenderingContext, c ContentSpec) []byte {
