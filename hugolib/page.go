@@ -38,6 +38,7 @@ import (
 
 	bp "github.com/gohugoio/hugo/bufferpool"
 	"github.com/gohugoio/hugo/source"
+	"github.com/imdario/mergo"
 	"github.com/spf13/cast"
 )
 
@@ -329,6 +330,18 @@ func (ps Pages) findFirstPagePosByFilePathPrefix(prefix string) int {
 	}
 	for i, x := range ps {
 		if strings.HasPrefix(x.Source.Path(), prefix) {
+			return i
+		}
+	}
+	return -1
+}
+
+func (ps Pages) findFirstPagePosByFileDirAndBaseFileName(dir, baseFileName string) int {
+	if dir == "" || baseFileName == "" {
+		return -1
+	}
+	for i, x := range ps {
+		if x.Source.Dir() == dir && x.Source.BaseFileName() == baseFileName {
 			return i
 		}
 	}
@@ -1295,6 +1308,36 @@ func (p *Page) Menus() PageMenus {
 				}
 				p.pageMenus[name] = &menuEntry
 
+			}
+		}
+
+		if p.Site.sectionDeepMenu && !p.IsSection() && p.Section() != "" && len(p.sections) > 0 {
+			sectionPage, _ := p.Site.GetPage(KindSection, p.Section())
+			if sectionPage.Pages != nil {
+				var parentMenuId string
+
+				parentPagePos := sectionPage.Pages.findFirstPagePosByFileDirAndBaseFileName(filepath.Split(filepath.Join(p.sections...)))
+				if parentPagePos != -1 {
+					parentPage := sectionPage.Pages[parentPagePos]
+					if parentPage != nil {
+						parentMenuId = filepath.ToSlash(parentPage.Source.Path())
+					}
+				} else {
+					parentMenuId = ""
+				}
+
+				me := MenuEntry{Identifier: filepath.ToSlash(p.Source.Path()),
+					Parent: parentMenuId,
+					Name:   p.LinkTitle(),
+					Menu:   p.Section(),
+					Weight: p.Weight,
+					URL:    p.RelPermalink()}
+
+				if pageMe, ok := p.pageMenus[p.Section()]; ok {
+					mergo.MergeWithOverwrite(&me, pageMe)
+				}
+
+				p.pageMenus[p.Section()] = &me
 			}
 		}
 	})
