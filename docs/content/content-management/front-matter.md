@@ -34,7 +34,7 @@ JSON
 
 ### TOML Example
 
-```toml
+```
 +++
 title = "spf13-vim 3.0 release and new website"
 description = "spf13-vim is a cross platform distribution of vim plugins and resources for Vim."
@@ -50,11 +50,11 @@ slug = "spf13-vim-3-0-release-and-new-website"
 
 ### YAML Example
 
-```yaml
+```
 ---
 title: "spf13-vim 3.0 release and new website"
 description: "spf13-vim is a cross platform distribution of vim plugins and resources for Vim."
-#tags: [ ".vimrc", "plugins", "spf13-vim", "vim" ]
+tags: [ ".vimrc", "plugins", "spf13-vim", "vim" ]
 lastmod: 2015-12-23
 date: "2012-04-06"
 categories:
@@ -66,7 +66,7 @@ slug: "spf13-vim-3-0-release-and-new-website"
 
 ### JSON Example
 
-```json
+```
 {
     "title": "spf13-vim 3.0 release and new website",
     "description": "spf13-vim is a cross platform distribution of vim plugins and resources for Vim.",
@@ -154,7 +154,7 @@ You can add fields to your front matter arbitrarily to meet your needs. These us
 
 The following fields can be accessed via `.Params.include_toc` and `.Params.show_comments`, respectively. The [Variables][] section provides more information on using Hugo's page- and site-level variables in your templates.
 
-```yaml
+```
 include_toc: true
 show_comments: false
 ```

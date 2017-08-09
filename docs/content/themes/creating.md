@@ -1,6 +1,6 @@
 ---
-title: Creating a Theme
-linktitle: Creating a Theme
+title: Create a Theme
+linktitle: Create a Theme
 description: The `hugo new theme` command will scaffold the beginnings of a new theme for you to get you on your way.
 date: 2017-02-01
 publishdate: 2017-02-01
@@ -25,13 +25,13 @@ If you're creating a theme with plans to share it with the community, use relati
 
 Hugo can initialize a new blank theme directory within your existing `themes` using the `hugo new` command:
 
-```bash
+```
 hugo new theme [name]
 ```
 
 ## Theme Components
 
-A theme consists of templates and static assets such as javascript and css files. Themes can also provide [archetypes][], which are archetypal content types used by the `hugo new` command to scaffold new conte files with preconfigured front matter.
+A theme consists of templates and static assets such as javascript and css files. Themes can also provide [archetypes][], which are archetypal content types used by the `hugo new` command to scaffold new content files with preconfigured front matter.
 
 
 {{% note "Use the Hugo Generator Tag" %}}

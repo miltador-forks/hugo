@@ -7,7 +7,9 @@ helping to manage issues, etc.
 
 The Hugo community and maintainers are [very active](https://github.com/gohugoio/hugo/pulse/monthly) and helpful, and the project benefits greatly from this activity. We created a [step by step guide](https://gohugo.io/tutorials/how-to-contribute-to-hugo/) if you're unfamiliar with GitHub or contributing to open source projects in general.
 
-*Note that this repository only contains the actual source code of Hugo. For documentation-related pull requests / issues please refer to the [hugoDocs](https://github.com/gohugoio/hugodocs) repository.*
+*Note that this repository only contains the actual source code of Hugo. For **only** documentation-related pull requests / issues please refer to the [hugoDocs](https://github.com/gohugoio/hugoDocs) repository.*
+
+*Pull requests that contain changes on the code base **and** related documentation, e.g. for a new feature, shall remain a single, atomic one.*
 
 ## Table of Contents
 
@@ -95,7 +97,7 @@ You **must use govendor** to fetch and manage Hugo's dependencies.
 ### Fetch the Sources From GitHub
 
 ```
-go get github.com/kardianos/govendor
+go get -u github.com/kardianos/govendor
 govendor get github.com/gohugoio/hugo
 ```
 

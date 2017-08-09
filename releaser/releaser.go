@@ -31,12 +31,13 @@ import (
 
 const commitPrefix = "releaser:"
 
+// ReleaseHandler provides functionality to release a new version of Hugo.
 type ReleaseHandler struct {
 	cliVersion string
 
 	// If set, we do the releases in 3 steps:
-	// 1: Create and write a draft release notes
-	// 2: Prepare files for new version.
+	// 1: Create and write a draft release note
+	// 2: Prepare files for new version
 	// 3: Release
 	step        int
 	skipPublish bool
@@ -80,6 +81,7 @@ func (r ReleaseHandler) calculateVersions() (helpers.HugoVersion, helpers.HugoVe
 	return newVersion, finalVersion
 }
 
+// New initialises a ReleaseHandler.
 func New(version string, step int, skipPublish, try bool) *ReleaseHandler {
 	rh := &ReleaseHandler{cliVersion: version, step: step, skipPublish: skipPublish, try: try}
 
@@ -95,6 +97,7 @@ func New(version string, step int, skipPublish, try bool) *ReleaseHandler {
 	return rh
 }
 
+// Run creates a new release.
 func (r *ReleaseHandler) Run() error {
 	if os.Getenv("GITHUB_TOKEN") == "" {
 		return errors.New("GITHUB_TOKEN not set, create one here with the repo scope selected: https://github.com/settings/tokens/new")
@@ -127,17 +130,24 @@ func (r *ReleaseHandler) Run() error {
 		}
 	}
 
-	var gitCommits gitInfos
+	var (
+		gitCommits     gitInfos
+		gitCommitsDocs gitInfos
+	)
 
 	if r.shouldPrepareReleasenotes() || r.shouldRelease() {
-		gitCommits, err = getGitInfos(changeLogFromTag, !r.try)
+		gitCommits, err = getGitInfos(changeLogFromTag, "", !r.try)
+		if err != nil {
+			return err
+		}
+		gitCommitsDocs, err = getGitInfos(changeLogFromTag, "../hugoDocs", !r.try)
 		if err != nil {
 			return err
 		}
 	}
 
 	if r.shouldPrepareReleasenotes() {
-		releaseNotesFile, err := r.writeReleaseNotesToTemp(version, gitCommits)
+		releaseNotesFile, err := r.writeReleaseNotesToTemp(version, gitCommits, gitCommitsDocs)
 		if err != nil {
 			return err
 		}

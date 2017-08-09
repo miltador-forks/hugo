@@ -24,7 +24,7 @@ It's best to make changes to the Hugo docs on your local machine to check for co
 
 You can then create a separate branch for your additions. Be sure to choose a descriptive branch name that best fits the type of content. The following is an example of a branch name you might use for adding a new website to the showcase:
 
-```git
+```
 git checkout -b jon-doe-showcase-addition
 ```
 
@@ -38,10 +38,6 @@ Adding new content to the Hugo docs follows the same pattern, regardless of the 
 hugo new <DOCS-SECTION>/<new-content-lowercase>.md
 ```
 
-{{% note "`title:`, `date:`, and Field Order" %}}
-`title` and `date` fields are added automatically when using archetypes via `hugo new`. Do not be worried if the order of the new file's front matter fields on your local machine is different than that of the examples provided in the Hugo docs. This is a known issue [(#452)](https://github.com/gohugoio/hugo/issues/452).
-{{% /note %}}
-
 ### Add a New Function
 
 Once you have cloned the Hugo repository, you can create a new function via the following command. Keep the file name lowercase.
@@ -52,11 +48,9 @@ hugo new functions/newfunction.md
 
 The archetype for `functions` according to the Hugo theme is as follows:
 
-{{% code file="archetypes/functions.md" %}}
-```yaml
+{{< code file="archetypes/functions.md" >}}
 {{< readfile file="/themes/gohugoioTheme/archetypes/functions.md">}}
-```
-{{% /code %}}
+{{< /code >}}
 
 #### New Function Required Fields
 
@@ -94,22 +88,6 @@ Here is a review of the front matter fields automatically generated for you usin
 
 In the body of your function, expand the short description used in the front matter. Include as many examples as possible, and leverage the Hugo docs [`code` shortcode](#adding-code-blocks). If you are unable to add examples but would like to solicit help from the Hugo community, add `needsexample: true` to your front matter.
 
-### Add a New Tutorial
-
-Once you have cloned the Hugo repository, you can create a new tutorial via the following command. Name the markdown file accordingly:
-
-```
-hugo new tutorials/my-new-tutorial.md
-```
-
-The archetype for the `tutorials` content type is as follows:
-
-{{% code file="archetypes/tutorials.md" %}}
-```yaml
-{{< readfile file="/themes/gohugoioTheme/archetypes/tutorials.md">}}
-```
-{{% /code %}}
-
 ## Add Code Blocks
 
 Code blocks are crucial for providing examples of Hugo's new features to end users of the Hugo docs. Whenever possible, create examples that you think Hugo users will be able to implement in their own projects.
@@ -120,11 +98,11 @@ Across all pages on the Hugo docs, the typical triple-back-tick markdown syntax 
 
 Your options for languages are `xml`/`html`, `go`/`golang`, `md`/`markdown`/`mkd`, `handlebars`, `apache`, `toml`, `yaml`, `json`, `css`, `asciidoc`, `ruby`, `powershell`/`ps`, `scss`, `sh`/`zsh`/`bash`/`git`, `http`/`https`, and `javascript`/`js`.
 
-````html
-```html
+```
+```
 <h1>Hello world!</h1>
 ```
-````
+```
 
 ### Code Block Shortcode
 
@@ -138,13 +116,13 @@ With the `code` shortcodes, *you must include triple back ticks and a language d
 
 `code` is the Hugo docs shortcode you'll use most often. `code` requires has only one named parameter: `file`. Here is the pattern:
 
-````markdown
+```
 {{%/* code file="smart/file/name/with/path.html" download="download.html" copy="true" */%}}
-```language
+```
 A whole bunch of coding going on up in here!
 ```
 {{%/* /code */%}}
-````
+```
 
 The following are the arguments passed into `code`:
 
@@ -164,9 +142,9 @@ This example HTML code block tells Hugo users the following:
 1. This file *could* live in `layouts/_default`, as demonstrated by `layouts/_default/single.html` as the value for `file`.
 2. This snippet is complete enough to be downloaded and implemented in a Hugo project, as demonstrated by `download="single.html"`.
 
-````md
+```
 {{%/* code file="layouts/_default/single.html" download="single.html" */%}}
-```html
+```
 {{ define "main" }}
 <main>
     <article>
@@ -186,14 +164,13 @@ This example HTML code block tells Hugo users the following:
 {{ end }}
 ```
 {{%/* /code */%}}
-````
+```
 
 ##### Example 'code' Display
 
 The output of this example will render to the Hugo docs as follows:
 
-{{% code file="layouts/_default/single.html" download="single.html" %}}
-```html
+{{< code file="layouts/_default/single.html" download="single.html" >}}
 {{ define "main" }}
 <main>
     <article>
@@ -211,36 +188,33 @@ The output of this example will render to the Hugo docs as follows:
     </article>
 </main>
 {{ end }}
-```
-{{% /code %}}
+{{< /code >}}
 
 <!-- #### Output Code Block
 
 The `output` shortcode is almost identical to the `code` shortcode but only takes and requires `file`. The purpose of `output` is to show *rendered* HTML and therefore almost always follows another basic code block *or* and instance of the `code` shortcode:
 
-````html
+```
 {{%/* output file="post/my-first-post/index.html" */%}}
-```html
+```
 <h1>This is my First Hugo Blog Post</h1>
 <p>I am excited to be using Hugo.</p>
 ```
 {{%/* /output */%}}
-````
+```
 
 The preceding `output` example will render as follows to the Hugo docs:
 
-{{% output file="post/my-first-post/index.html" %}}
-```html
+{{< output file="post/my-first-post/index.html" >}}
 <h1>This is my First Hugo Blog Post</h1>
 <p>I am excited to be using Hugo.</p>
-```
-{{% /output %}} -->
+{{< /output >}} -->
 
 ## Blockquotes
 
 Blockquotes can be added to the Hugo documentation using [typical Markdown blockquote syntax][bqsyntax]:
 
-```markdown
+```
 > Without the threat of punishment, there is no joy in flight.
 ```
 
@@ -250,7 +224,7 @@ The preceding blockquote will render as follows in the Hugo docs:
 
 However, you can add a quick and easy `<cite>` element (added on the client via JavaScript) by separating your main blockquote and the citation with a hyphen with a single space on each side:
 
-```markdown
+```
 > Without the threat of punishment, there is no joy in flight. - [Kobo Abe](https://en.wikipedia.org/wiki/Kobo_Abe)
 ```
 
@@ -276,23 +250,19 @@ Use the `note` shortcode when you want to draw attention to information subtly. 
 
 #### Example `note` Input
 
-{{% code file="note-with-heading.md" %}}
-```markdown
+{{< code file="note-with-heading.md" >}}
 {{%/* note */%}}
 Here is a piece of information I would like to draw your **attention** to.
 {{%/* /note */%}}
-```
-{{% /code %}}
+{{< /code >}}
 
 #### Example `note` Output
 
-{{% output file="note-with-heading.html" %}}
-```html
+{{< output file="note-with-heading.html" >}}
 {{% note %}}
 Here is a piece of information I would like to draw your **attention** to.
 {{% /note %}}
-```
-{{% /output %}}
+{{< /output >}}
 
 #### Example `note` Display
 
@@ -306,23 +276,19 @@ Use the `tip` shortcode when you want to give the reader advice. `tip`, like `no
 
 #### Example `tip` Input
 
-{{% code file="using-tip.md" %}}
-```markdown
+{{< code file="using-tip.md" >}}
 {{%/* tip */%}}
 Here's a bit of advice to improve your productivity with Hugo.
 {{%/* /tip */%}}
-```
-{{% /code %}}
+{{< /code >}}
 
 #### Example `tip` Output
 
-{{% output file="tip-output.html" %}}
-```html
+{{< output file="tip-output.html" >}}
 {{% tip %}}
 Here's a bit of advice to improve your productivity with Hugo.
 {{% /tip %}}
-```
-{{% /output %}}
+{{< /output >}}
 
 #### Example `tip` Display
 
@@ -336,23 +302,19 @@ Use the `warning` shortcode when you want to draw the user's attention to someth
 
 #### Example `warning` Input
 
-{{% code file="warning-admonition-input.md" %}}
-```markdown
+{{< code file="warning-admonition-input.md" >}}
 {{%/* warning */%}}
 This is a warning, which should be reserved for *important* information like breaking changes.
 {{%/* /warning */%}}
-```
-{{% /code %}}
+{{< /code >}}
 
 #### Example `warning` Output
 
-{{% output file="warning-admonition-output.html" %}}
-```html
+{{< output file="warning-admonition-output.html" >}}
 {{% warning %}}
 This is a warning, which should be reserved for *important* information like breaking changes.
 {{% /warning %}}
-```
-{{% /output %}}
+{{< /output >}}
 
 #### Example `warning` Display
 

@@ -1,7 +1,7 @@
 ---
 title: slice
 # linktitle: slice
-description: Creates a alice (array) of all passed arguments.
+description: Creates a slice (array) of all passed arguments.
 godocref:
 date: 2017-02-01
 publishdate: 2017-02-01
@@ -23,12 +23,10 @@ toc: false
 
 One use case is the concatenation of elements in combination with the [`delimit` function][]:
 
-{{% code file="slice.html" %}}
-```html
+{{< code file="slice.html" >}}
 {{ delimit (slice "foo" "bar" "buzz") ", " }}
 <!-- returns the string "foo, bar, buzz" -->
-```
-{{% /code %}}
+{{< /code >}}
 
 
 [`delimit` function]: /functions/delimit/

@@ -26,7 +26,7 @@ Hugo supports loading data from YAML, JSON, and TOML files located in the `data`
 
 The `data` folder is where you can store additional data for Hugo to use when generating your site. Data files aren't used to generate standalone pages; rather, they're meant to be supplemental to content files. This feature can extend the content in case your front matter fields grow out of control. Or perhaps you want to show a larger dataset in a template (see example below). In both cases, it's a good idea to outsource the data in their own files.
 
-These files must be YAML, JSON, or TOML files (using the `.yml`, `.yaml`, `.json`, or `toml` extension). The data will be accessible as a `map` in the `.Site.Data` variable.
+These files must be YAML, JSON, or TOML files (using the `.yml`, `.yaml`, `.json`, or `.toml` extension). The data will be accessible as a `map` in the `.Site.Data` variable.
 
 ## Data Files in Themes
 
@@ -73,7 +73,7 @@ The list of bass players can be accessed via `.Site.Data.jazz.bass`, a single ba
 
 You can now render the list of recordings for all the bass players in a template:
 
-```html
+```
 {{ range $.Site.Data.jazz.bass }}
    {{ partial "artist.html" . }}
 {{ end }}
@@ -126,7 +126,7 @@ Data-driven content currently consists of two functions, `getJSON` and `getCSV`,
 
 In your template, call the functions like this:
 
-```golang
+```
 {{ $dataJ := getJSON "url" }}
 {{ $dataC := getCSV "separator" "url" }}
 ```
@@ -142,21 +142,21 @@ The separator for `getCSV` must be put in the first position and can only be one
 
 All passed arguments will be joined to the final URL:
 
-```html
+```
 {{ $urlPre := "https://api.github.com" }}
 {{ $gistJ := getJSON $urlPre "/users/GITHUB_USERNAME/gists" }}
 ```
 
 This will resolve internally to the following:
 
-```html
+```
 {{ $gistJ := getJSON "https://api.github.com/users/GITHUB_USERNAME/gists" }}
 ```
 
 Finally, you can range over an array. This example will output the
 first 5 gists for a GitHub user:
 
-```html
+```
 <ul>
   {{ $urlPre := "https://api.github.com" }}
   {{ $gistJ := getJSON $urlPre "/users/GITHUB_USERNAME/gists" }}
@@ -172,8 +172,7 @@ first 5 gists for a GitHub user:
 
 For `getCSV`, the one-character-long separator must be placed in the first position followed by the URL. The following is an example of creating an HTML table in a [partial template][partials] from a published CSV:
 
-{{% code file="layouts/partials/get-csv.html" %}}
-```html
+{{< code file="layouts/partials/get-csv.html" >}}
   <table>
     <thead>
       <tr>
@@ -194,8 +193,7 @@ For `getCSV`, the one-character-long separator must be placed in the first posit
     {{ end }}
     </tbody>
   </table>
-```
-{{% /code %}}
+{{< /code >}}
 
 The expression `{{index $r number}}` must be used to output the nth-column from the current row.
 

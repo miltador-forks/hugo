@@ -1,5 +1,5 @@
 ---
-title: replacere
+title: replaceRE
 # linktitle: replaceRE
 description: Replaces all occurrences of a regular expression with the replacement pattern.
 godocref:
@@ -19,7 +19,7 @@ deprecated: false
 aliases: []
 ---
 
-```golang
+```
 {{ replaceRE "^https?://([^/]+).*" "$1" "http://gohugo.io/docs" }}` → "gohugo.io"
 {{ "http://gohugo.io/docs" | replaceRE "^https?://([^/]+).*" "$1" }}` → "gohugo.io"
 ```
